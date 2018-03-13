@@ -14,12 +14,10 @@ import requests
 import zipfile
 import shutil
 import json
-import jsonschema
-import fasteners
 
 from mms.log import get_logger
 from jsonschema import validate
-
+from utils.timeit_decorator import timeit
 
 logger = get_logger()
 
@@ -28,7 +26,7 @@ MANIFEST_DIR = "manifest_schema"
 MANIFEST_SCHEMA_FILE = 'manifest-schema.json'
 MANIFEST_FILENAME = 'MANIFEST.json'
 
-
+@timeit
 def _download_and_extract(model_location, path=None, overwrite=False):
     """Download an given URL
 

@@ -14,6 +14,7 @@ import mms.model_service.mxnet_model_service as mxnet_model_service
 from mms.model_service.model_service import load_service
 from mms.model_service.mxnet_model_service import MXNetBaseService
 from mms.storage import KVStorage
+from utils.timeit_decorator import timeit
 
 
 class ServiceManager(object):
@@ -119,6 +120,7 @@ class ServiceManager(object):
         """
         self.loaded_modelservices[service_name] = ModelServiceClassDef(model_name, model_path, manifest, gpu)
 
+    @timeit
     def parse_modelservices_from_module(self, service_file):
         """
         Parse user defined module to get all model service classe in it.

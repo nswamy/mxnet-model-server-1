@@ -19,6 +19,7 @@ from mms.model_loader import ModelLoader
 import logging
 import os
 import sys
+from utils.timeit_decorator import timeit
 
 if sys.version_info[0] == 3:
     import socketserver as SocketServer
@@ -135,6 +136,8 @@ class MMS(object):
             logger.error('Failed to start model serving host: ' + str(e))
             exit(1)
 
+
+    @timeit
     def _arg_process(self):
         """Process arguments before starting service or create application.
         """

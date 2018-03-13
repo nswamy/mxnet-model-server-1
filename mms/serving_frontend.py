@@ -19,6 +19,7 @@ from mms.service_manager import ServiceManager
 from mms.request_handler.flask_handler import FlaskRequestHandler
 from mms.log import get_logger
 from mms.metrics_manager import MetricsManager
+from utils.timeit_decorator import timeit
 
 logger = get_logger()
 
@@ -75,6 +76,7 @@ class ServingFrontend(object):
         for service_name, model_name, model_path, manifest in models:
             self.service_manager.load_model(service_name, model_name, model_path, manifest, ModelServiceClassDef, gpu)
 
+    @timeit
     def register_module(self, user_defined_module_file_path):
         """
         Register a python module according to user_defined_module_name
