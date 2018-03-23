@@ -173,8 +173,8 @@ This would update the current docker instance of MMS with the updated model endp
 ## Launching MMS in ECS
 Now that we have seen how to launch MMS in a container, we can now look at scaling this architecture for production.
 In this document, we will look into a setup which looks as follows:
-TODO: Update the image
 
+![alt text](https://s3.amazonaws.com/mms-doc-images/gen-architecture.jpg "MMS Architecture Diagram")
 
 Here we created a ECS cluster with one VPC and two availability zones. Each of these zones have their own subnet's. 
 
@@ -186,6 +186,10 @@ The steps to create a MMS cluster is split into the following sections:
 * [Build and/or push Docker Image onto ECR repository](#build-and-publish-a-docker-image-onto-amazon-ecr-repository)
 * [Create an ECS Cluster](#create-a-ecs-cluster)
 * [Create an EFS](#create-an-efs-for-persistent-storage-across-cluster-instances)
+* [Create ECS Cluster Task](#create-tasks-in-the-cluster)
+* [Create an ELB](#create-a-elastic-load-balancer)
+* [Starting MMS Service](#starting-a-service)
+* [Verification of the MMS Service](#verification-of-mms-service-health)
 
 ### Build and publish a Docker image onto Amazon ECR Repository
 After logging onto your AWS account, 
@@ -324,7 +328,7 @@ In our example, the Application Load Balancer's Security group ID is "sg-f6abfd8
 
 Now that we have an application load balancer, we can go ahead and create our service.
     
-### Starting a service.
+### Starting MMS service
 Once the task is created, we can now create a Service that can be launched onto the ECS cluster. 
 TODO: Image "create_service.png"
 
@@ -338,7 +342,7 @@ TODO: Image "create_service.png"
     
 This would have created a service which would be up and running. 
 
-### Verification of Service Health
+### Verification of MMS Service Health
  
 Verify that the service is up and running by going to the browser and hitting the Application Load Balancers endpoint. If the Application
 Load Balancer's DNS Name is mms-demo-elb-353755180.us-east-1.elb.amazonaws.com,
